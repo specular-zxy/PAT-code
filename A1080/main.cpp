@@ -31,7 +31,7 @@ int main(){
 
     sort(stu.begin(), stu.end(), cmp);
 
-    // cnt represent the number of the student that an school has accepted
+    // cnt represent the number of the student that an school has acceptedZ
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < k; j++) {
             int schid = stu[i].choice[j];
