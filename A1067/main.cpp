@@ -1,24 +1,37 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
+const int maxn = 100010;
+int pos[maxn];
+
 int main() {
-    int n, t, cnt = 0, a[100010];
-    cin >> n;
-    for(int i = 0; i < n; i++){
-        cin >> t;
-        a[t] = i;
-    } // 不一样的存储方式，a[t] = i ,意为 t 的输入顺序是i；
-    for(int i = 1; i < n; i++) {
-        if(i != a[i]) {
-            while(a[0] != 0) {
-                swap(a[0],a[a[0]]);
-                cnt++;
-            }
-            if(i != a[i]) {
-                swap(a[0],a[i]);
-                cnt++;
+    int n, ans = 0;
+    scanf("%d", &n);
+    int left = n - 1, num;
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &num);
+        pos[num] = i;  // the same;
+        if (num == i && num != 0) left--;
+    }
+    int k = 1;   // 不在本位
+    while(left > 0) {
+        if (pos[0] == 0) {
+            while (k < n) {
+                if (pos[k] != k) {
+                    swap(pos[0], pos[k]);
+                    ans++;
+                    break;
+                }
+                k++;
             }
         }
-    } // 不一样的存储方式，导致我无法较好地理解其算法思路。
-    cout << cnt;
+        while (pos[0] != 0) {
+            swap(pos[0], pos[pos[0]]);
+            ans++;
+            left--;
+        }
+    }
+
+    printf("%d\n", ans);
     return 0;
 }
