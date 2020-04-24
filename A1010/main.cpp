@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 using namespace std;
+
 // 进制转换
 long long convert(string n, long long radix) {
     long long sum = 0;
@@ -15,14 +16,15 @@ long long convert(string n, long long radix) {
 }
 
 // 查找
-long long find_radix(string n, long long num) {    //num radix
+long long find_radix(string n, long long num) {    //num -> radix
     char it = *max_element(n.begin(), n.end());
+    // low 和 high 的确定十分重要，low为字符串里最大的那个数，而 high 为 num(radix) 与 low 中较大的那个值。
     long long low = (isdigit(it) ? it - '0': it - 'a' + 10) + 1;
     long long high = max(num, low);
-    while (low <= high) {
+    while (low <= high) {                         // 二分查找
         long long mid = (low + high) / 2;
         long long t = convert(n, mid);
-        if (t < 0 || t > num) high = mid - 1;    // t = convert number
+        if (t < 0 || t > num) high = mid - 1;    // t = convert number        // t < 0 是什么情况？
         else if (t == num) return mid;           // 找到了
         else low = mid + 1;
     }
