@@ -1,18 +1,16 @@
-// todo 运行超时需要解决
 #include <iostream>
 #include <set>
 using namespace std;
 set<int> sett[50];
 void cmpl(set<int> tmp, set<int> temp) {
-    int nc = 0, nt = 0;
+    int nc = 0, nt = tmp.size();
     for (int i : temp) {
         if (tmp.find(i) == tmp.end()) {
-            tmp.insert(i);
+            nt++;
         } else {
             nc++;
         }
     }
-    nt = tmp.size();
     float count = (float)nc / (float)nt;
     printf("%.1f%%\n",count * 100);
 }
