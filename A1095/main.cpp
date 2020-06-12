@@ -97,6 +97,6 @@ int main(){
         }
     }
 
-    printf("%d:%d:%d", maxtime / 3600, (maxtime % 3600) / 60, maxtime % 60);
+    printf("%02d:%02d:%02d", maxtime / 3600, (maxtime % 3600) / 60, maxtime % 60);
     return 0;
 }
